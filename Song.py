@@ -5,8 +5,11 @@ class Song:
         self.album = album
         self.path = path
 
+    """def __str__(self):
+        return "Song: {}, Artist: {}, Album: {}".format(self.name, self.artist, self.album) """
+
     def __str__(self):
-        return "Song: {}, Artist: {}, Album: {}".format(self.name, self.artist, self.album)
+        return "{}".format(self.path)
 
     def __getitem__(self, index):
         return (self.name, self.artist, self.album, self.path)[index]

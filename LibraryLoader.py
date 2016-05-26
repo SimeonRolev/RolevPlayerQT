@@ -16,11 +16,11 @@ def create_song(path):
 def add_song_to_dict(song, sort_dict):
     if song.artist in sort_dict:
         if song.album in sort_dict[song.artist]:
-            sort_dict[song.artist][song.album].append(song.name)
+            sort_dict[song.artist][song.album].append((song.name, song.path))
         else:
-            sort_dict[song.artist][song.album] = [song.name]
+            sort_dict[song.artist][song.album] = [(song.name, song.path)]
     else:
-        sort_dict[song.artist] = {song.album: [song.name]}
+        sort_dict[song.artist] = {song.album: [(song.name, song.path)]}
 
 
 def load_music_from_dir(root_dir):
@@ -35,5 +35,5 @@ def load_music_from_dir(root_dir):
 
 
 if __name__ == '__main__':
-    for key, value in load_music_from_dir('.').items():
+    for key, value in load_music_from_dir('../TestMusic').items():
         print(key, value)
