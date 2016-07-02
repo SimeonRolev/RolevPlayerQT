@@ -2,10 +2,7 @@
 ## Synopsis
 
 This is a simple player, supporting .mp3 files. It is integrated with last.fm and supports the following features:
--scrobbling
--automatic album covers downloading
--automatic lyrics search (uses lyricsnmusic.com)
--automatic artist/album info links
+scrobbling, automatic album covers downloading, automatic lyrics search (uses lyricsnmusic.com), automatic artist/album info links.
 
 ## Usage
 
@@ -30,6 +27,6 @@ save this session key into your user_info.txt file.
 For more info about the methods and requesting api_key and secret, visit the last.fm API.
 http://www.last.fm/api/intro
 
-License
+##License
 
 It's free, yaay!
