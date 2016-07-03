@@ -1,10 +1,12 @@
-from setuptools import setup, find_packages
+from distutils.core import setup
 
-setup(name='RolevPlayer',
-      description='A simple music player for a python course',
-      author='Simeon Rolev',
-      author_email='simorolev@gmail.com',
-      url='https://github.com/SimeonRolev/RolevPlayerQT',
-      packages=find_packages(),
-      license="PSF"
-     )
+setup(
+    name='RolevPlayerQT',
+    version='1.0',
+    packages=['RolevPlayer'],
+    url='https://github.com/SimeonRolev/RolevPlayerQT',
+    license='PSF',
+    author='Simeon Rolev',
+    author_email='simorolev@gmail.com',
+    description='A simple player for a Python course'
+)

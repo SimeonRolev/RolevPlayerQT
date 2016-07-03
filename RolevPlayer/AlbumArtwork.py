@@ -2,8 +2,9 @@ import json
 import requests
 import urllib.request
 import os.path
+import RolevPlayer as r
 
-last_fm_api_key = "bf8dba2058d06673bddb97e04c6f7c3e"
+last_fm_api_key = r.API_KEY
 
 def album_cover(album_path, artist, album):
 

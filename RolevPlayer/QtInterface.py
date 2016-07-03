@@ -5,6 +5,7 @@ from PyQt5.QtGui import QPixmap
 from RolevPlayer import LibraryLoader
 from RolevPlayer import RequestLyrics
 from RolevPlayer import AlbumArtwork
+from RolevPlayer import Scrobbler
 import webbrowser
 
 
@@ -303,3 +304,4 @@ class Window(QtWidgets.QDialog):
         cover_url = AlbumArtwork.album_cover(curr_album_path, curr_artist, curr_album)
 
         self.current_album_cover.setPixmap(QPixmap(cover_url))
+        Scrobbler.scrobble(self.get_current_artist(), self.get_current_title())
