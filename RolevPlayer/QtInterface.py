@@ -17,7 +17,7 @@ class Window(QtWidgets.QDialog):
         self.setWindowTitle("Rolev Player")
 
 # LIBRARY ROOT DIR FOLDER
-        self.search_label = QtWidgets.QLabel("Select the root directory of a music folder:", self)
+        self.search_label = QtWidgets.QLabel("Select a music folder:", self)
         self.search_label.setGeometry(10, 5, 205, 10)
 
         self.btn_root_folder = QtWidgets.QPushButton("Browse", self)
@@ -45,7 +45,7 @@ class Window(QtWidgets.QDialog):
         self.artist_select = QtWidgets.QComboBox(self)
         self.artist_select.setGeometry(10, 70, 250, 25)
         self.artist_select.activated[str].connect(self.on_artist_selection)
-        
+
 # ALBUMS DROP BOX
         self.album_select_label = QtWidgets.QLabel("Albums", self)
         self.album_select_label.setGeometry(10, 90, 250, 25)
@@ -95,16 +95,18 @@ class Window(QtWidgets.QDialog):
 
 # LYRICS SEARCH
         self.btn_lyrics = QtWidgets.QPushButton("Search\n Lyrics", self)
-        self.btn_lyrics.setGeometry(220,310,70,80)
+        self.btn_lyrics.setGeometry(220, 310, 70, 80)
         self.btn_lyrics.clicked.connect(self.on_lyrics)
 
 # ALBUM INFO SEARCH
-        self.btn_album_info = QtWidgets.QPushButton("Search\nAlbum\nInfo", self)
+        self.btn_album_info = QtWidgets.QPushButton(
+            "Search\nAlbum\nInfo", self)
         self.btn_album_info.setGeometry(105, 180, 75, 75)
         self.btn_album_info.clicked.connect(self.on_album_info)
 
 # ARTIST INFO SEARCH
-        self.btn_artist_info = QtWidgets.QPushButton("Search\nArtist\nInfo", self)
+        self.btn_artist_info = QtWidgets.QPushButton(
+            "Search\nArtist\nInfo", self)
         self.btn_artist_info.setGeometry(200, 180, 75, 75)
         self.btn_artist_info.clicked.connect(self.on_artist_info)
 
@@ -128,7 +130,8 @@ class Window(QtWidgets.QDialog):
     def on_btn_root_folder(self):
         self.root_dir = QtWidgets.QFileDialog().getExistingDirectory()
         self.dir_text_field.setText(self.root_dir)
-        self.library = LibraryLoader.load_music_from_dir(self.dir_text_field.text())
+        self.library = LibraryLoader.load_music_from_dir(
+            self.dir_text_field.text())
 
         self.artist_select.clear()
         self.album_select.clear()
@@ -167,13 +170,15 @@ class Window(QtWidgets.QDialog):
             for album in self.library[artist]:
                 for song in self.library[artist][album]:
                     self.song_select.addItem(song[0])
-                    self.playlist.addMedia(QMediaContent(QtCore.QUrl.fromLocalFile(song[1])))
-                    
+                    self.playlist.addMedia(
+                        QMediaContent(QtCore.QUrl.fromLocalFile(song[1])))
+
     def load_all_from_artist(self, artist):
         for album in self.library[artist]:
             for song in self.library[artist][album]:
                 self.song_select.addItem(song[0])
-                self.playlist.addMedia(QMediaContent(QtCore.QUrl.fromLocalFile(song[1])))
+                self.playlist.addMedia(
+                    QMediaContent(QtCore.QUrl.fromLocalFile(song[1])))
 
     def on_album_selection(self):
         current_artist = self.artist_select.currentText()
@@ -193,11 +198,14 @@ class Window(QtWidgets.QDialog):
                     if album == self.album_select.currentText():
                         for song in self.library[artist][album]:
                             self.song_select.addItem(song[0])
-                            self.playlist.addMedia(QMediaContent(QtCore.QUrl.fromLocalFile(song[1])))
+                            self.playlist.addMedia(
+                                QMediaContent(
+                                    QtCore.QUrl.fromLocalFile(song[1])))
         else:
             for song in self.library[current_artist][current_album]:
                 self.song_select.addItem(song[0])
-                self.playlist.addMedia(QMediaContent(QtCore.QUrl.fromLocalFile(song[1])))
+                self.playlist.addMedia(
+                    QMediaContent(QtCore.QUrl.fromLocalFile(song[1])))
 
     def on_song_selection(self):
         index = self.song_select.currentIndex()
@@ -236,12 +244,16 @@ class Window(QtWidgets.QDialog):
             curr_artist = self.get_current_artist()
             curr_song = self.get_current_title()
 
-            found_lyrics = RequestLyrics.search_song_lyrics(curr_artist, curr_song)
-            choice = QtWidgets.QMessageBox.question(self, "Lyrics", found_lyrics[0], QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+            found_lyrics = RequestLyrics.search_song_lyrics(
+                curr_artist, curr_song)
+            choice = QtWidgets.QMessageBox.question(
+                self, "Lyrics", found_lyrics[0],
+                QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
             if choice == QtWidgets.QMessageBox.Yes:
                 webbrowser.open(found_lyrics[1])
         else:
-            QtWidgets.QMessageBox.information(self, "Lyrics", "Sorry, no lyrics found or no media is loaded!")
+            QtWidgets.QMessageBox.information(
+                self, "Lyrics", "No lyrics found or no media is loaded!")
 
     def on_album_info(self):
         album = self.get_current_album()
@@ -249,7 +261,8 @@ class Window(QtWidgets.QDialog):
         if (album is None) or (artist is None):
             print("Please, load a song first!")
         else:
-            artist_info, album_info = AlbumArtwork.album_artist_info(artist, album)
+            artist_info, album_info = AlbumArtwork.album_artist_info(
+                artist, album)
             if album_info is not None:
                 webbrowser.open(album_info)
 
@@ -259,7 +272,8 @@ class Window(QtWidgets.QDialog):
         if (album is None) or (artist is None):
             print("Please, load a song first!")
         else:
-            artist_info, album_info = AlbumArtwork.album_artist_info(artist, album)
+            artist_info, album_info = AlbumArtwork.album_artist_info(
+                artist, album)
             if artist_info is not None:
                 webbrowser.open(artist_info)
 
@@ -301,7 +315,8 @@ class Window(QtWidgets.QDialog):
         curr_album_path = self.get_current_album_path()
         curr_album = self.get_current_album()
         curr_artist = self.get_current_artist()
-        cover_url = AlbumArtwork.album_cover(curr_album_path, curr_artist, curr_album)
+        cover_url = AlbumArtwork.album_cover(
+            curr_album_path, curr_artist, curr_album)
 
         self.current_album_cover.setPixmap(QPixmap(cover_url))
         Scrobbler.scrobble(self.get_current_artist(), self.get_current_title())

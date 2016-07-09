@@ -17,7 +17,8 @@ def create_initial_info_file(api_key, secret):
 
     # getting a token and writing it into the file
 
-    url = "http://ws.audioscrobbler.com/2.0/?method=auth.gettoken&api_key=" + api_key
+    url = "http://ws.audioscrobbler.com/2.0/?method=' + \
+          'auth.gettoken&api_key=" + api_key
 
     response = urllib.request.urlopen(url)
     content = response.read().decode('utf-8')
@@ -37,6 +38,7 @@ def create_initial_info_file(api_key, secret):
     with open("./user_info.txt", "w") as file:
         file.write(user_info_dump)
 
-    webbrowser.open("http://www.last.fm/api/auth/?api_key=" + user_info['api_key'] + "&token=" + user_info['token'])
+    webbrowser.open("http://www.last.fm/api/auth/?api_key=" +
+                    user_info['api_key'] + "&token=" + user_info['token'])
 
 #create_initial_info_file("4f095aef8f8ad2b76843515d1ae4050b", "9f43fd9ee06318fe92ba00072e030a4b")

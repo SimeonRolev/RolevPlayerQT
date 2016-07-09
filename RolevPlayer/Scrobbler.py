@@ -1,7 +1,9 @@
-import requests
 import json
 import time
 from _md5 import md5
+
+import requests
+
 import RolevPlayer as r
 
 
@@ -37,7 +39,6 @@ def scrobble(artist, track):
                             "timestamp" + str(ts) +
                             "track" + track +
                             r.SECRET).encode('utf-8')).hexdigest()
-
 
     req = requests.post(
         "http://ws.audioscrobbler.com/2.0/?method=track.scrobble" +

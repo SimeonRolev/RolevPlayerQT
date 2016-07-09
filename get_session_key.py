@@ -8,19 +8,21 @@ with open("./user_info.txt", 'r') as user_info:
 API_KEY = constants['api_key']
 SECRET = constants['secret']
 TOKEN = constants['token']
-SK = constants['sk'] # Session key
+SK = constants['sk']  # Session key
 
 print("\nAPI key: ", API_KEY, "\nSecret: ", SECRET, "\nToken: ", TOKEN)
 
-api_signature = md5(("api_key" + API_KEY + "methodauth.getSessiontoken" + TOKEN + SECRET).encode('utf-8')).hexdigest()
+api_signature = md5(
+    ("api_key" + API_KEY + "methodauth.getSessiontoken" + TOKEN + SECRET
+     ).encode('utf-8')).hexdigest()
 
 print("API Signature: {}".format(api_signature))
 
 url = "http://ws.audioscrobbler.com//2.0/?method=auth.getSession" + \
-    "&api_key=" + API_KEY + \
-    "&token=" + TOKEN + \
-    "&format=json" + \
-    "&api_sig=" + api_signature
+      "&api_key=" + API_KEY + \
+      "&token=" + TOKEN + \
+      "&format=json" + \
+      "&api_sig=" + api_signature
 
 req = requests.post(url).text
 req = json.loads(req)
