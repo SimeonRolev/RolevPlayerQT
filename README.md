@@ -29,4 +29,4 @@ http://www.last.fm/api/intro
 
 ##License
 
-It's free, yaay!
+It's free, yay!
